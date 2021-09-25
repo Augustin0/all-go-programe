@@ -57,13 +57,18 @@ func GetEmpresa(empresaName string) Empresa {
 	return empresa
 }
 
-func (*Empresa) getEmpleados(empresaName string, epleadoName string) Empleado {
-
+func (e *Empresa) getEmpleados(empresaName string, epleadoName string) Empleado {
 	var empleado Empleado
-	for _, empresa := range listaEmpresas {
-		if empresa.Name == empresaName {
-			for _, empleado_ := range empresa.EmpleadoInfo {
-				empleado = empleado_
+	if e != nil {
+		for _, empleado_ := range e.EmpleadoInfo {
+			empleado = empleado_
+		}
+	} else {
+		for _, empresa := range listaEmpresas {
+			if empresa.Name == empresaName {
+				for _, empleado_ := range empresa.EmpleadoInfo {
+					empleado = empleado_
+				}
 			}
 		}
 	}
@@ -75,11 +80,16 @@ func ListEmpresas() Empresas {
 	return listaEmpresas
 }
 
-func (*Empresa) listEmpleados(empresaName string) Empleados {
+func (e *Empresa) listEmpleados(empresaName string) Empleados {
 	var empleados map[int]Empleado = make(map[int]Empleado)
-	for _, empresa := range listaEmpresas {
-		if empresa.Name == empresaName {
-			empleados = empresa.EmpleadoInfo
+	if e != nil {
+		empleados = e.EmpleadoInfo
+	} else {
+
+		for _, empresa := range listaEmpresas {
+			if empresa.Name == empresaName {
+				empleados = empresa.EmpleadoInfo
+			}
 		}
 	}
 	return empleados
