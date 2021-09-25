@@ -21,8 +21,10 @@ type Empresa struct {
 	TotalEmpleado int
 	EmpleadoInfo  Empleados
 }
+
 type Empresas map[int]Empresa
 type EmpresaName string
+
 type EmpresaManager interface {
 	SetEmpleado(e *Empresa, empleadoInfo Empleado) bool
 	getEmpleados(empresaName string, epleadoName string) Empleado
@@ -93,8 +95,4 @@ func (e *Empresa) listEmpleados(empresaName string) Empleados {
 		}
 	}
 	return empleados
-}
-
-func Public() {
-	//EmpresaManager.setEmpleado()
 }
